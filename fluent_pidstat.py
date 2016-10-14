@@ -17,6 +17,7 @@ from fluent import sender
 from fluent import event
 
 FLUENTD_HOST = "localhost"
+FLUENTD_PORT = 24224
 CMD_TEMPLATE = "pidstat ${p} -hurdw ${interval} 1"
 INTERVAL_SECONDS = 10
 
@@ -88,7 +89,7 @@ def pidstat(cid):
 
 def daemon_task():
     cli = docker.Client()
-    sender.setup('log.pidstat', host=FLUENTD_HOST, port=24224)
+    sender.setup('log.pidstat', host=FLUENTD_HOST, port=FLUENTD_PORT)
 
     while True:
         cids = []
